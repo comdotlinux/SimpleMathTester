@@ -40,7 +40,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -50,37 +49,35 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#onQuit" text="Quit"/>
+                        <MenuItem mnemonicParsing="false" onAction="#onQuit" text="Quit" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
         <AnchorPane VBox.vgrow="ALWAYS">
             <children>
-                <Label layoutX="6.0" layoutY="6.0" text="Minimum"/>
-                <TextField fx:id="minValue" layoutX="74.0" layoutY="2.0" onAction="#onMinValueChanged" prefHeight="24.0" prefWidth="50.0"/>
-                <Label layoutX="131.0" layoutY="6.0" text="Maximum"/>
-                <TextField fx:id="maxValue" layoutX="202.0" layoutY="2.0" onAction="#onMaxValueChanged" prefHeight="24.0" prefWidth="50.0"/>
-                <CheckBox layoutX="258.0" layoutY="5.0" mnemonicParsing="false" onAction="#onAdditionChecked" prefHeight="18.0" prefWidth="85.0" text="Addition"/>
-                <CheckBox layoutX="343.0" layoutY="5.0" mnemonicParsing="false" onAction="#onSubtractionChecked" text="Subtraction"/>
-                <CheckBox layoutX="449.0" layoutY="5.0" mnemonicParsing="false" onAction="#onMultiplicationChecked" text="Multiplication"/>
-                <CheckBox layoutX="567.0" layoutY="5.0" mnemonicParsing="false" onAction="#onDivisionChecked" prefHeight="18.0" prefWidth="85.0" text="Division"/>
-                <Button layoutX="4.0" layoutY="39.0" mnemonicParsing="false" onAction="#generate" prefHeight="24.0" prefWidth="427.0" text="Generate"/>
-                <CheckBox layoutX="443.0" layoutY="42.0" mnemonicParsing="false" onAction="#onGenerateNextOnCheck" prefHeight="18.0" prefWidth="200.0" text="Generate Next On Check"/>
+                <Label layoutX="6.0" layoutY="6.0" text="Minimum" />
+                <TextField fx:id="minValue" layoutX="74.0" layoutY="2.0" onAction="#onMinValueChanged" prefHeight="24.0" prefWidth="50.0" />
+                <Label layoutX="131.0" layoutY="6.0" text="Maximum" />
+                <TextField fx:id="maxValue" layoutX="202.0" layoutY="2.0" onAction="#onMaxValueChanged" prefHeight="24.0" prefWidth="50.0" />
+                <CheckBox layoutX="258.0" layoutY="5.0" mnemonicParsing="false" onAction="#onAdditionChecked" prefHeight="18.0" prefWidth="85.0" text="Addition" />
+                <CheckBox layoutX="343.0" layoutY="5.0" mnemonicParsing="false" onAction="#onSubtractionChecked" text="Subtraction" />
+                <CheckBox layoutX="449.0" layoutY="5.0" mnemonicParsing="false" onAction="#onMultiplicationChecked" text="Multiplication" />
+                <CheckBox layoutX="567.0" layoutY="5.0" mnemonicParsing="false" onAction="#onDivisionChecked" prefHeight="18.0" prefWidth="85.0" text="Division" />
+                <Button layoutX="4.0" layoutY="39.0" mnemonicParsing="false" onAction="#generate" prefHeight="24.0" prefWidth="643.0" text="Generate" />
 
-
-                <Label fx:id="lhs" layoutX="17.0" layoutY="87.0" prefHeight="16.0" prefWidth="50.0" text="?" textAlignment="CENTER"/>
-                <Label fx:id="operation" layoutX="67.0" layoutY="87.0" prefHeight="16.0" prefWidth="50.0" text="?" textAlignment="CENTER"/>
-                <Label fx:id="rhs" layoutX="117.0" layoutY="87.0" prefHeight="16.0" prefWidth="50.0" text="?" textAlignment="CENTER"/>
-                <Label layoutX="177.0" layoutY="87.0" prefHeight="16.0" prefWidth="50.0" text="=" textAlignment="CENTER"/>
-                <TextField fx:id="answerInput" layoutX="208.0" layoutY="83.0" prefHeight="24.0" prefWidth="65.0"/>
-                <Button fx:id="revealAnswer" layoutX="288.0" layoutY="83.0" mnemonicParsing="false" onAction="#onRevealAnswer" prefHeight="24.0" prefWidth="171.0" text="Check Answer"/>
-                <Label fx:id="answer" layoutX="475.0" layoutY="87.0" prefHeight="16.0" prefWidth="61.0" visible="false"/>
-                <Label fx:id="duration" layoutX="549.0" layoutY="87.0" prefHeight="16.0" prefWidth="77.0"/>
-                <Label layoutX="22.0" layoutY="122.0" prefHeight="16.0" prefWidth="290.0" text="Correct Answers" textAlignment="CENTER" textFill="green"/>
-                <ListView fx:id="correctHistory" layoutX="11.0" layoutY="144.0" prefHeight="215.0" prefWidth="307.0"/>
-                <Label layoutX="345.0" layoutY="122.0" prefHeight="16.0" prefWidth="290.0" text="Wrong Answers" textAlignment="CENTER" textFill="red"/>
-                <ListView fx:id="incorrectHistory" layoutX="336.0" layoutY="144.0" prefHeight="215.0" prefWidth="307.0"/>
+                <Label fx:id="lhs" layoutX="17.0" layoutY="87.0" prefHeight="16.0" prefWidth="50.0" text="?" textAlignment="CENTER" />
+                <Label fx:id="operation" layoutX="67.0" layoutY="87.0" prefHeight="16.0" prefWidth="50.0" text="?" textAlignment="CENTER" />
+                <Label fx:id="rhs" layoutX="117.0" layoutY="87.0" prefHeight="16.0" prefWidth="50.0" text="?" textAlignment="CENTER" />
+                <Label layoutX="177.0" layoutY="87.0" prefHeight="16.0" prefWidth="50.0" text="=" textAlignment="CENTER" />
+                <TextField fx:id="answerInput" layoutX="208.0" layoutY="83.0" prefHeight="24.0" prefWidth="65.0" />
+                <Button fx:id="revealAnswer" layoutX="288.0" layoutY="83.0" mnemonicParsing="false" onAction="#onRevealAnswer" prefHeight="24.0" prefWidth="171.0" text="Check Answer" />
+                <Label fx:id="answer" layoutX="475.0" layoutY="87.0" prefHeight="16.0" prefWidth="61.0" visible="false" />
+                <Label fx:id="duration" layoutX="549.0" layoutY="87.0" prefHeight="16.0" prefWidth="77.0" />
+                <Label layoutX="22.0" layoutY="122.0" prefHeight="16.0" prefWidth="290.0" text="Correct Answers" textAlignment="CENTER" textFill="green" />
+                <ListView fx:id="correctHistory" layoutX="11.0" layoutY="144.0" prefHeight="215.0" prefWidth="307.0" />
+                <Label layoutX="345.0" layoutY="122.0" prefHeight="16.0" prefWidth="290.0" text="Wrong Answers" textAlignment="CENTER" textFill="red" />
+                <ListView fx:id="incorrectHistory" layoutX="336.0" layoutY="144.0" prefHeight="215.0" prefWidth="307.0" />
             </children>
         </AnchorPane>
     </children>
