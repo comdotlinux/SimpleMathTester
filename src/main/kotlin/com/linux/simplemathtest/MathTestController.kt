@@ -1,9 +1,16 @@
 package com.linux.simplemathtest
 
+import com.sun.javafx.scene.control.behavior.TextAreaBehavior
+import javafx.application.Platform
 import javafx.collections.ObservableList
 import javafx.event.ActionEvent
+import javafx.event.Event
+import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.scene.input.KeyCode
+import javafx.scene.input.KeyEvent
+import java.lang.Thread.sleep
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 import kotlin.system.exitProcess
@@ -119,12 +126,17 @@ class MathTestController {
     private val allowedOperations = AllowedOperations()
     private val limits = ValueLimits()
 
+
+    @FXML
+    fun initialize() {
+    }
+
     fun onAdditionChecked(actionEvent: ActionEvent) {
         allowedOperations.addition = (actionEvent.target as CheckBox).isSelected
     }
 
-    fun onMinValueChanged(actionEvent: ActionEvent) {
-        limits.min = (actionEvent.target as TextField).text.toIntOrNull() ?: 0
+    fun onMinValueChanged(event: Event) {
+        limits.min = (event.target as TextField).text.toIntOrNull() ?: 0
         minValue.text = limits.min.toString()
     }
 
@@ -140,45 +152,54 @@ class MathTestController {
         allowedOperations.division = (actionEvent.target as CheckBox).isSelected
     }
 
-    fun onMaxValueChanged(actionEvent: ActionEvent) {
-        limits.max = (actionEvent.target as TextField).text.toIntOrNull() ?: 100
+    fun onMaxValueChanged(event: Event) {
+        limits.max = (event.target as TextField).text.toIntOrNull() ?: 100
         maxValue.text = limits.max.toString()
     }
 
     private lateinit var currentOperation: OperationWithTimedResult
 
+ /*   fun onAnswerInputChanged(event: Event) {
+        revealAnswer.requestFocus()
+    }*/
+
     fun generate() {
-        currentOperation = allowedOperations.randomOperation(limits)
-        lhs.text = currentOperation.lhs
-        rhs.text = currentOperation.rhs
-        operation.text = currentOperation.operation
-        answer.text = currentOperation.result
-        answerInput.text = ""
-        answer.isVisible = false
-        duration.isVisible = false
+        Platform.runLater {
+            currentOperation = allowedOperations.randomOperation(limits)
+            lhs.text = currentOperation.lhs
+            rhs.text = currentOperation.rhs
+            operation.text = currentOperation.operation
+            answer.text = currentOperation.result
+            answerInput.text = ""
+            answer.isVisible = false
+            duration.isVisible = false
 
-        minValue.text = limits.min.toString()
-        maxValue.text = limits.max.toString()
-    }
-
-    fun onRevealAnswer() {
-        answer.isVisible = true
-        duration.isVisible = true
-        duration.text = "took ${currentOperation.tookTime()}s"
-
-        if (answerInput.text == currentOperation.result) {
-            answer.textFill = javafx.scene.paint.Color.GREEN
-            duration.textFill = javafx.scene.paint.Color.GREEN
-            correctHistory.items.addIfNotExists(Label(currentOperation.prettify(answerInput.text)))
-        } else {
-            answer.textFill = javafx.scene.paint.Color.RED
-            duration.textFill = javafx.scene.paint.Color.RED
-            incorrectHistory.items.addIfNotExists(Label(currentOperation.prettify(answerInput.text)))
+            minValue.text = limits.min.toString()
+            maxValue.text = limits.max.toString()
+            answerInput.requestFocus()
         }
     }
 
-    fun ObservableList<Any>.addIfNotExists(label: Label) {
-        if (filterIsInstance<Label>().any { it.text == label.text }.not()) {
+    fun onRevealAnswer() {
+        Platform.runLater {
+            answer.isVisible = true
+            duration.isVisible = true
+            duration.text = "took ${currentOperation.tookTime()}s"
+
+            if (answerInput.text == currentOperation.result) {
+                answer.textFill = javafx.scene.paint.Color.GREEN
+                duration.textFill = javafx.scene.paint.Color.GREEN
+                correctHistory.items.addIfNotExists(Label(currentOperation.prettify(answerInput.text)))
+            } else {
+                answer.textFill = javafx.scene.paint.Color.RED
+                duration.textFill = javafx.scene.paint.Color.RED
+                incorrectHistory.items.addIfNotExists(Label(currentOperation.prettify(answerInput.text)))
+            }
+        }
+    }
+
+    private fun ObservableList<Any>.addIfNotExists(label: Label) {
+        if (filterIsInstance<Label>().none { it.text == label.text }) {
             add(label)
         }
     }
